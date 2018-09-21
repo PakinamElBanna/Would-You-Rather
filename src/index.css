@@ -12,3 +12,18 @@ body {
 .logo {
   width: 200px;
 }
+.container {
+  padding: 0.2em;
+}
+.title {
+  font-weight: 400;
+  color: #4C4C4C;
+}
+.input {
+  font-size: 1em;
+  outline: none;
+  padding: 0.5em;
+}
+.field {
+  margin: 1em 0;
+}
