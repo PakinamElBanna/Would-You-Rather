@@ -1,0 +1,20 @@
+.Navigation {
+  padding: 0.5em;
+  flex-basis: 85%;
+}
+
+.Navigation-list {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  align-items: center;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  flex-basis: 85%;
+  justify-content: space-evenly;
+}
+
+.Navigation-item:hover {
+  text-decoration: underline;
+}

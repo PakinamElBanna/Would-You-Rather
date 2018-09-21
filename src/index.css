@@ -9,9 +9,10 @@ body {
   background: linear-gradient(45deg, #e410a6 0%,#fe4873 25%,#fe8d73 50%,#ffb55a 75%,#ffdf94 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e410a6', endColorstr='#ffdf94',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
-.logo {
-  width: 200px;
-  margin-top: 1em;
+
+ul {
+  padding: 0;
+  list-style: none;
 }
 .container {
   padding: 0.2em;
@@ -27,4 +28,15 @@ body {
 }
 .field {
   margin: 1em 0;
+}
+.med-avatar {
+  width: 100px;
+  height: 100px;
+}
+.small-avatar {
+  width: 50px;
+  height: 50px;
+}
+.center {
+  margin: 0 auto;
 }

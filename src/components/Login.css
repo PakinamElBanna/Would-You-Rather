@@ -13,3 +13,6 @@
 .login-button {
   margin-top: 3em;
 }
+.login-button button {
+  background: #482c6d;
+}

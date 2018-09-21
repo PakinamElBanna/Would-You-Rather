@@ -41,7 +41,7 @@ handleAuthedUser = event => {
     return (
       <div className="login-container">
         <h1 className="title">Please Login</h1>
-        <Avatar user={this.props.users[userId]} />
+        <div className="med-avatar center"><Avatar user={this.props.users[userId]} /></div>
         <form onSubmit={this.handleAuthedUser} className="login-form">
         <FormControl fullWidth>
           <Select value={userId} onChange={this.handleUserChange}>
