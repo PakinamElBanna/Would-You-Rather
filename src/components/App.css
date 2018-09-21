@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+  padding: 1em;
+}
+
+.App-container {
+  text-align: center;
+  background: #FFF;
+  height: 80vh;
+  border-radius: 1em;
+}
+
+.App-footer {
+  font-size: 0.5rem;
+  font-weight: 200;
+  color: #fff;
+  text-align: right;
+  padding: 1em;
+  margin-top: 1em;
+}
+
+.footer-icon {
+  vertical-align: middle;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
