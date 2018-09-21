@@ -11,6 +11,7 @@ body {
 }
 .logo {
   width: 200px;
+  margin-top: 1em;
 }
 .container {
   padding: 0.2em;

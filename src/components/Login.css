@@ -1,6 +1,5 @@
 .login-container {
-  padding: 1em;
-  padding-top: 5em;
+  padding: 2em;
 }
 .login-form {
   width: 40%;
@@ -12,5 +11,5 @@
   margin: 1em;
 }
 .login-button {
-  margin-top: 2em;
+  margin-top: 3em;
 }

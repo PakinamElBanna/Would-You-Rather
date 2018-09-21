@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css'
+import { connect } from 'react-redux'
 import Icon from '@material-ui/core/Icon'
 import logo from '../logo.svg'
 import { TiHeartFullOutline } from 'react-icons/ti/index'
@@ -25,4 +26,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);
