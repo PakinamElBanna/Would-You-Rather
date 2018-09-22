@@ -10,7 +10,8 @@ class NewPoll extends Component {
   state = {
     optionOneText: '',
     optionTwoText: '',
-    author: null
+    author: null,
+    toHome: false
   }
 
   isDisabled () {
@@ -43,16 +44,19 @@ class NewPoll extends Component {
       }
       const { dispatch } = this.props
       dispatch(handleAddQuestion(question))
+      .then(() => this.setState(() => ({
+        toHome: true
+      })))
     }
 
   render() {
-    const { optionOneText , optionTwoText } = this.state
+    const { optionOneText , optionTwoText, toHome } = this.state
     const { authedUser } = this.props
 
-    if( authedUser === null ) {
+    if( authedUser === null || toHome === true ) {
       return <Redirect to='/' />
     }
-    
+
     return (
       <div className="sub-container">
         <h1 className="title">Would you rather..</h1>
