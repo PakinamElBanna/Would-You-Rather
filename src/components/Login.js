@@ -39,7 +39,7 @@ handleAuthedUser = event => {
   render() {
     const { userId } = this.state
     return (
-      <div className="login-container">
+      <div className="sub-container">
         <h1 className="title">Please Login</h1>
         <div className="med-avatar center"><Avatar user={this.props.users[userId]} /></div>
         <form onSubmit={this.handleAuthedUser} className="login-form">
@@ -50,7 +50,7 @@ handleAuthedUser = event => {
             ))}
           </Select>
         </FormControl>
-        <div className="login-button">
+        <div className="button">
           <Button type="submit" variant="contained" color="primary" fullWidth>
           Login
          </Button>
