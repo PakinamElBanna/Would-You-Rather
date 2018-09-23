@@ -1,0 +1,25 @@
+.Questions-Navigation {
+  display: flex;
+  justify-content: space-evenly;
+  width: 25%;
+  margin: 0;
+  padding: 0 1em;
+  background: #ff7173;
+  border-radius: 10px;
+  color: #FFF;
+}
+
+.Questions-item {
+  padding: 0 1em;
+  text-transform: capitalize;
+  margin: 1em 0;
+}
+
+.Questions-item:first-child {
+  border-right: 1px solid #FFF;
+}
+
+.Questions-item:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

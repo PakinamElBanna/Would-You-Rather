@@ -1,4 +1,4 @@
-import { saveQuestion } from '../utils/api'
+import { saveQuestion, getAllQuestions } from '../utils/api'
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const GET_QUESTIONS = 'GET_QUESTIONS'
 
@@ -25,4 +25,13 @@ export function handleAddQuestion(question) {
       })
       .then((question) => dispatch(addQuestion(question)))
     }
+}
+
+export function handleGetQuestions() {
+  return (dispatch) => {
+    return getAllQuestions()
+    .then(({questions}) => {
+      dispatch(getQuestions(questions))
+    })
+  }
 }

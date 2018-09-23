@@ -7,6 +7,9 @@
   flex-wrap: wrap;
   margin: 1em;
 }
+.Login-avatar {  
+  margin: 2em auto;
+}
 .button button {
   background: #482c6d;
 }

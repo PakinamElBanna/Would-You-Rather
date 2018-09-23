@@ -8,7 +8,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Avatar from './Avatar'
-import { handleGetUsers } from '../actions/users'
 import { setAuthedUser } from '../actions/authedUser'
 import { setSelectedUser } from '../actions/selectedUser'
 
@@ -18,7 +17,6 @@ class Login extends Component {
   }
 
 componentDidMount() {
-  this.props.dispatch(handleGetUsers())
   this.props.dispatch(setSelectedUser(this.state.userId))
 }
 
@@ -41,7 +39,7 @@ handleAuthedUser = event => {
     return (
       <div className="sub-container">
         <h1 className="title">Please Login</h1>
-        <div className="med-avatar center"><Avatar user={this.props.users[userId]} /></div>
+        <div className="med-avatar center Login-avatar"><Avatar user={this.props.users[userId]} /></div>
         <form onSubmit={this.handleAuthedUser} className="login-form">
         <FormControl fullWidth>
           <Select value={userId} onChange={this.handleUserChange}>

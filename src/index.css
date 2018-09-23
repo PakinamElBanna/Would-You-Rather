@@ -46,3 +46,7 @@ ul {
 .button {
   margin-top: 3em;
 }
+.Button-Link {
+  color: #FFF;
+  text-decoration: none;
+}
