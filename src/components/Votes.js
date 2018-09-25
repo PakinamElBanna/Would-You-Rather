@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Votes.css'
+import Avatar from './Avatar'
 
 class Votes extends Component {
   componentDidMount(){
@@ -16,6 +17,7 @@ class Votes extends Component {
   }
 
   render() {
+    const { authedUser, users } = this.props
     const optionOnePercentage = (this.props.question.optionOne.votes.length/(this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) * 100
     const optionTwoPercentage = (this.props.question.optionTwo.votes.length/(this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) * 100
     const { optionOne, optionTwo } = this.props.question
@@ -32,12 +34,12 @@ class Votes extends Component {
     return style
     }
 
-
     return (
       <div className="Votes">
         <div className="Vote">
           <p>{optionOne.text}</p>
           <div className={this.isSelected('optionOne') ? "Vote-Container selectedbyAuthedUser" : "Vote-Container"} >
+          {this.isSelected('optionOne') && <div className="Vote-Avatar"><Avatar user={users[authedUser]} /></div>}
           <div className="Vote-Bar">
             <div className="Vote-Bar-Width" style={optionOneStyle()}></div>
           </div>
@@ -47,6 +49,7 @@ class Votes extends Component {
         <div className="Vote">
         <p>{optionTwo.text}</p>
         <div className={this.isSelected('optionTwo') ? "Vote-Container selectedbyAuthedUser" : "Vote-Container"} >
+        {this.isSelected('optionTwo') && <div className="Vote-Avatar"><Avatar user={authedUser} /></div>}
         <div className="Vote-Bar">
           <div className="Vote-Bar-Width" style={optionTwoStyle()}></div>
         </div>

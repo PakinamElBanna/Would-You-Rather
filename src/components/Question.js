@@ -78,7 +78,7 @@ class Question extends Component {
                      </RadioGroup>
                    </FormControl>}
                    {this.props.id && displayVotes === true &&
-                     <Votes question={questions[id]} authedUser={authedUser}/>
+                     <Votes question={questions[id]} authedUser={authedUser} users={users}/>
                      }
                    {this.props.question &&
                    <div className="Question-options">

@@ -18,6 +18,7 @@
   padding: 0.5em 1em;
   margin: 0.5em 0;
   border-radius: 10px;
+  position: relative;
 }
 
 .Vote-Bar {
@@ -27,6 +28,17 @@
   width: 100%;
   flex-basis: 85%;
   border-radius: 5px;
+}
+
+.Vote-Avatar {
+  position: absolute;
+  right: 0;
+  height: 100px;
+  width: 100px;
+  right: -2em;
+  height: 40px;
+  width: 40px;
+
 }
 
 .Vote-Bar-Width {
