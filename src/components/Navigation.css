@@ -15,10 +15,11 @@
   justify-content: space-evenly;
 }
 
-.Navigation-item:hover {
-  text-decoration: underline;
+.Navigation-item, .Navigation-item a {
+  color: #FFF;
+  text-decoration: none;
 }
 
-.active {
+.Navigation-item:hover {
   text-decoration: underline;
 }

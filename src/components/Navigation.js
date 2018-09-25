@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { setAuthedUser } from '../actions/authedUser'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import './Navigation.css'
 
 class Navigation extends Component {
   render() {
     const logout = ()  =>  {
       this.props.dispatch(setAuthedUser(null))
+      this.props.history.push('/home')
     }
 
     const { authedUser } = this.props
@@ -15,17 +16,17 @@ class Navigation extends Component {
       <div className="Navigation">
         <ul className="Navigation-list">
           <li className="Navigation-item">
-          <NavLink to='/home' activeClassName='active'>
+          <NavLink to='/home'>
             Home
           </NavLink>
           </li>
           <li className="Navigation-item">
-          <NavLink to='/add' activeClassName='active'>
+          <NavLink to='/add'>
             Create Poll
           </NavLink>
           </li>
           <li className="Navigation-item">
-          <NavLink to='/leaderboard' activeClassName='active'>
+          <NavLink to='/leaderboard'>
             Leaderboard
           </NavLink>
           </li>
@@ -38,4 +39,4 @@ class Navigation extends Component {
   }
 }
 
-export default connect()(Navigation)
+export default withRouter(connect()(Navigation))

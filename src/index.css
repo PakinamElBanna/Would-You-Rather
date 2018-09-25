@@ -51,3 +51,12 @@ ul {
   color: #FFF;
   text-decoration: none;
 }
+.Back {
+  font-size: 4em;
+  vertical-align: middle;
+  text-align: left;
+  height: 1em;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}

@@ -35,7 +35,7 @@ class Home extends Component {
         <li onClick={this.handleDisplayQuestions} className="Questions-item">answered</li>
       </ul>
       <ul className="Questions-List">
-        {Object.values(this.props.questions).map((question) => (
+        {Object.values(this.props.orderedQuestions).map((question) => (
           <li key={question.id}>
           <Question question={question}/>
           </li>
@@ -48,12 +48,10 @@ class Home extends Component {
 }
 
 function mapStateToProps({questions}){
-    let orderedQuestions = {}
-    Object.keys(questions).sort().forEach(function(key){
-    orderedQuestions[key] = questions[key]
-    })
+    let orderedQuestions = Object.keys(questions).map(key => questions[key]).sort((a, b) =>
+    a.timestamp< b.timestamp ? 1 : -1)
   return {
-    questions: orderedQuestions,
+    orderedQuestions: orderedQuestions,
     questionsIds: Object.keys(questions)
   .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
   }

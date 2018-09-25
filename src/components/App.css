@@ -19,7 +19,7 @@
 
 .App-Navigation {
   display: flex;
-  flex-basis: 40%;
+  flex-basis: 50%;
   justify-content: space-between;
 }
 

@@ -1,0 +1,53 @@
+.Votes {
+  margin: 1em;
+}
+
+.selectedbyAuthedUser {
+  background: #fdeeb952;
+  border: 1px solid #fe8173;
+}
+.Vote:first-child {
+  margin-bottom: 1em;
+}
+
+.Vote-Container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  padding: 0.5em 1em;
+  margin: 0.5em 0;
+  border-radius: 10px;
+}
+
+.Vote-Bar {
+  background: #f0f0f0;
+  height: 40px;
+  margin: 0.5em 0;
+  width: 100%;
+  flex-basis: 85%;
+  border-radius: 5px;
+}
+
+.Vote-Bar-Width {
+  background: #fe8173;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.Vote {
+  display: flex;
+  flex-direction: column;
+}
+
+.Vote p {
+  text-align: left;
+  margin: 0;
+  color: #fe8173;
+  font-size: 0.9em;
+}
+
+.Vote-Number {
+  font-size: 0.9em;
+  flex-basis: 15%;
+}

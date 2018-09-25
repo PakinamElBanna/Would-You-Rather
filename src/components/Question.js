@@ -11,6 +11,8 @@ import { handleAnswerQuestion } from '../actions/questions'
 import Avatar from './Avatar'
 import './Question.css'
 import { Link, withRouter } from 'react-router-dom'
+import Votes from './Votes'
+import {TiArrowLeft} from 'react-icons/ti/index'
 
 class Question extends Component {
 
@@ -37,30 +39,33 @@ class Question extends Component {
       }
       const { dispatch } = this.props
       dispatch(handleAnswerQuestion(answer))
-      .then(() => {this.setState(() => {
-        displayVotes : true
-      })
-    console.log(this.props.questions[this.props.id])})
+      .then(() => this.setState(() => ({
+          displayVotes: true
+      }))
+    )
   }
 
   render () {
-    const { questions, question, users, id } = this.props
+    const { questions, question, users, id, authedUser } = this.props
     const { author, optionOne, optionTwo } = question? question : questions[id]
-    const { option } = this.state
+    const { option, displayVotes } = this.state
 
     return (
       <div className="Question">
+          { !question &&
+              <Link className="Back" to={'/home'}><TiArrowLeft /></Link>
+          }
           <div className="Question-container">
             <h2 className="Question-header">{question? author : questions[id].author} asks</h2>
             <div className="Question-body">
               <div className="Question-Avatar">
                 <Avatar user={question? users[author] : users[questions[id].author] } />
-                <p className="Question-timestamp">{ question? formatDate(question.timestamp) : questions[id].timestamp}</p>
+                <p className="Question-timestamp">{ question? formatDate(question.timestamp) : formatDate(questions[id].timestamp)}</p>
               </div>
               <div className="Question-content">
                 <h1 className="Question-title">Would you rather..</h1>
                 <div className="Question-options">
-                  {this.props.id &&
+                  {this.props.id && displayVotes === false &&
                     <FormControl component="fieldset">
                      <RadioGroup
                        aria-label="Gender"
@@ -72,16 +77,21 @@ class Question extends Component {
                        <FormControlLabel value="optionTwo" control={<Radio />} label={optionTwo.text} />
                      </RadioGroup>
                    </FormControl>}
+                   {this.props.id && displayVotes === true &&
+                     <Votes question={questions[id]} authedUser={authedUser}/>
+                     }
                    {this.props.question &&
                    <div className="Question-options">
                    <p>{optionOne.text} or {optionTwo.text}</p>
                    </div>}
                 </div>
-                <div className="Question-button">
+                 <div className="Question-button">
                     <Button variant="contained" color="primary" onClick={question? null : this.submitAnswer} disabled={!question && this.state.option === ''}>
                       {question? <Link className="Button-Link" to={`/questions/${question.id}`}>View Poll</Link>
                       :
-                      <span>Vote</span>}
+                      displayVotes === false ? <span>Vote</span>
+                      :
+                      <span><Link className="Button-Link" to={'/home'}>Back</Link></span>}
                    </Button>
                 </div>
               </div>
