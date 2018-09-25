@@ -13,6 +13,27 @@ export default function questions (state = {}, action ) {
       ...state,
       [action.question.id]: action.question
     }
+    case ANSWER_QUESTION:
+    const { answer } = action
+    const resetandAddVote = () => {
+      let filteredState = state
+        filteredState[action.qid]['optionOne'].votes = state[action.qid]['optionOne'].votes.filter((user) => user !== action.authedUser)
+        filteredState[action.qid]['optionTwo'].votes = filteredState[action.qid]['optionTwo'].votes.filter((user) => user !== action.authedUser)
+        state = filteredState
+        return state[action.qid][answer].votes.concat([action.authedUser])
+
+    }
+    return {
+      ...state,
+      [action.qid]: {
+        ...state[action.qid],
+        [action.answer]: {
+          ...state[action.qid][action.answer],
+          votes:
+            resetandAddVote()
+        }
+      }
+    }
     default:
     return state
   }

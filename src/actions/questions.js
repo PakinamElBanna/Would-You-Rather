@@ -10,6 +10,15 @@ export function addQuestion (question) {
   }
 }
 
+export function answerQuestionAndSave({ authedUser, qid, answer }) {
+  return {
+  type: ANSWER_QUESTION,
+  authedUser,
+  qid,
+  answer
+  }
+}
+
 export function getQuestions (questions) {
   return {
     type: GET_QUESTIONS,
@@ -30,12 +39,13 @@ export function handleAddQuestion(question) {
 
 export function handleAnswerQuestion(questionAnswer) {
   return ( dispatch ) => {
-    const { authedUser, qid, answer } = questionAnswer
-    return answerQuestion({
-      authedUser,
-      qid,
-      answer
-    })
+    dispatch(answerQuestionAndSave(questionAnswer))
+    return answerQuestion(questionAnswer)
+    .catch((e) => {
+      console.warn('Error in voting:', e)
+      dispatch(answerQuestionAndSave(questionAnswer))
+      alert('There was an error voting for this poll. Try again.')
+})
   }
 }
 

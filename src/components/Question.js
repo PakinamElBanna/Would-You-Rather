@@ -37,9 +37,10 @@ class Question extends Component {
       }
       const { dispatch } = this.props
       dispatch(handleAnswerQuestion(answer))
-      .then(() => this.setState(() => {
+      .then(() => {this.setState(() => {
         displayVotes : true
-      }))
+      })
+    console.log(this.props.questions[this.props.id])})
   }
 
   render () {
