@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import {formatDate} from '../utils/helpers'
+import { handleAnswerQuestion } from '../actions/questions'
 import Avatar from './Avatar'
 import './Question.css'
 import { Link, withRouter } from 'react-router-dom'
@@ -14,7 +15,8 @@ import { Link, withRouter } from 'react-router-dom'
 class Question extends Component {
 
   state = {
-    option: ''
+    option: '',
+    displayVotes: false
   }
 
   handleOptionChange = (e) => {
@@ -25,19 +27,34 @@ class Question extends Component {
     }))
   }
 
+  submitAnswer = (e) => {
+    e.preventDefault()
+      const { option } = this.state
+      const answer = {
+        authedUser: this.props.authedUser,
+        qid: this.props.id,
+        answer: option
+      }
+      const { dispatch } = this.props
+      dispatch(handleAnswerQuestion(answer))
+      .then(() => this.setState(() => {
+        displayVotes : true
+      }))
+  }
+
   render () {
-    const { questions, id, question, users } = this.props
-    const { author, optionOne, optionTwo } = question? question : this.props.questions[this.props.id]
+    const { questions, question, users, id } = this.props
+    const { author, optionOne, optionTwo } = question? question : questions[id]
     const { option } = this.state
 
     return (
       <div className="Question">
           <div className="Question-container">
-            <h2 className="Question-header">{question&& author} asks</h2>
+            <h2 className="Question-header">{question? author : questions[id].author} asks</h2>
             <div className="Question-body">
               <div className="Question-Avatar">
-                <Avatar user={question && users[author]} />
-                <p className="Question-timestamp">{ formatDate(question.timestamp)}</p>
+                <Avatar user={question? users[author] : users[questions[id].author] } />
+                <p className="Question-timestamp">{ question? formatDate(question.timestamp) : questions[id].timestamp}</p>
               </div>
               <div className="Question-content">
                 <h1 className="Question-title">Would you rather..</h1>
@@ -50,8 +67,8 @@ class Question extends Component {
                        value={option}
                        onChange={this.handleOptionChange}
                      >
-                       <FormControlLabel value="female" control={<Radio />} label={optionOne.text} />
-                       <FormControlLabel value="male" control={<Radio />} label={optionTwo.text} />
+                       <FormControlLabel value="optionOne" control={<Radio />} label={optionOne.text} />
+                       <FormControlLabel value="optionTwo" control={<Radio />} label={optionTwo.text} />
                      </RadioGroup>
                    </FormControl>}
                    {this.props.question &&
@@ -60,8 +77,10 @@ class Question extends Component {
                    </div>}
                 </div>
                 <div className="Question-button">
-                    <Button variant="contained" color="primary">
-                      {question? <Link className="Button-Link" to={question && `/questions/${question.id}`}>View Poll</Link> : null}
+                    <Button variant="contained" color="primary" onClick={question? null : this.submitAnswer} disabled={!question && this.state.option === ''}>
+                      {question? <Link className="Button-Link" to={`/questions/${question.id}`}>View Poll</Link>
+                      :
+                      <span>Vote</span>}
                    </Button>
                 </div>
               </div>
@@ -76,7 +95,8 @@ function mapStateToProps({users, questions, authedUser}, {id = null, question = 
   return {
     users,
     authedUser,
-    questions
+    questions,
+    id
   }
 }
 

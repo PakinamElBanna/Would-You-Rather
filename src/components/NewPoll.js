@@ -53,8 +53,8 @@ class NewPoll extends Component {
     const { optionOneText , optionTwoText, toHome } = this.state
     const { authedUser } = this.props
 
-    if( authedUser === null || toHome === true ) {
-      return <Redirect to='/' />
+    if ( authedUser && toHome === true ) {
+      this.props.history.push('/home')
     }
 
     return (

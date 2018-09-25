@@ -7,7 +7,12 @@ const  AppHeader = ({ users, authedUser }) =>
 
       <div className="App-header">
       <img className='logo' src={logo} />
-      {authedUser !== null && <div className="App-Navigation"><Navigation /><div className="small-avatar"><Avatar user={users[authedUser]} /></div></div>}
+      {authedUser !== null && <div className="App-Navigation">
+        <Navigation />
+          <div className="small-avatar">
+            <Avatar user={users[authedUser]} />
+          </div>
+        </div>}
       </div>
 
 export default AppHeader

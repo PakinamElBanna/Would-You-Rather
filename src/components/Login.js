@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import './Login.css'
 import TextField from '@material-ui/core/TextField';
+import { Redirect, withRouter } from 'react-router-dom'
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -31,6 +32,7 @@ handleUserChange = event => {
 handleAuthedUser = event => {
   event.preventDefault()
   this.props.dispatch(setAuthedUser(this.state.userId))
+  this.props.history.push("/home")
 }
 
 
@@ -59,11 +61,12 @@ handleAuthedUser = event => {
   }
 }
 
-function mapStateToProps({users}){
+function mapStateToProps({users, authedUser}){
   return {
+    authedUser,
     userIds: Object.keys(users),
     users
   }
 }
 
-export default connect(mapStateToProps)(Login)
+export default withRouter(connect(mapStateToProps)(Login))
