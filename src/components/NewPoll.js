@@ -14,7 +14,7 @@ class NewPoll extends Component {
   }
 
   isDisabled () {
-    return this.state.optionOneText.length < 1  || this.state.optionTwoText.length < 1
+    return this.state.optionOneText.length < 3  || this.state.optionTwoText.length < 3
   }
 
   handleOptionOne = (e) => {
@@ -58,7 +58,7 @@ class NewPoll extends Component {
 
     return (
       <div className="sub-container">
-        <h1 className="title">Would you rather..</h1>
+        <h1>Would you rather..</h1>
         <form onSubmit={this.handleAddPoll.bind(this)}>
           <TextField
               required

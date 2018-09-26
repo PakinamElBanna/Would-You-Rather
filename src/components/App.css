@@ -1,7 +1,11 @@
 .App {
   text-align: center;
-  position: relative;
+  background: red;
   height: 100%;
+  background-image: -moz-linear-gradient(45deg, #e410a6 0%, #fe4873 25%, #fe8d73 50%, #ffb55a 75%, #ffdf94 100%); /* FF3.6-15 */
+  background-image: -webkit-linear-gradient(45deg, #e410a6 0%,#fe4873 25%,#fe8d73 50%,#ffb55a 75%,#ffdf94 100%); /* Chrome10-25,Safari5.1-6 */
+  background-image: linear-gradient(0deg, #e410a6 0%,#fe4873 25%,#fe8d73 50%,#ffb55a 75%,#ffdf94 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e410a6', endColorstr='#ffdf94',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .App-container {
@@ -10,18 +14,24 @@
   background: #ffffff96;
   margin: 2em;
   border-radius: 1em;
+  margin-top: 5rem;
 }
 
 .App-header {
   display: flex;
   justify-content: space-between;
-  padding: 0.5em 2em;
+  padding: 0 2em;
   color: #4C4C4C;
+  background: #482b6de8;
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 70px;
 }
 
 .App-Navigation {
   display: flex;
-  flex-basis: 50%;
+  flex-basis: 45%;
   justify-content: space-between;
 }
 
@@ -30,14 +40,12 @@
   font-weight: 200;
   color: #fff;
   text-align: right;
-  padding: 1em;
+  padding: 0 4em;
   position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
-  margin-right: 2em;
   position: absolute;
-  bottom: -4em;
 }
 
 .footer-icon {
@@ -45,7 +53,9 @@
 }
 
 .logo {
-  width: 250px;
+  width: 130px;
+  height: 60px;
+  align-self: center;
 }
 .noMatch h1 {
   font-size: 5em;

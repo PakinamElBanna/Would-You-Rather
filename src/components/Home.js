@@ -44,20 +44,22 @@ class Home extends Component {
 }
 
 function mapStateToProps({questions, users, authedUser}){
-  const questionKeys = Object.keys(users[authedUser].answers)
-  const answeredQuestions = Object.keys(questions).filter(key => questionKeys.includes(key)).reduce((obj, key) => {obj[key] = questions[key]
-  return obj;
-  }, {});
-  const unansweredQuestions = Object.keys(questions).filter(key => !questionKeys.includes(key)).reduce((obj, key) => {obj[key] = questions[key]
-  return obj;
-  }, {});
-  const orderedUnansweredQuestions = Object.keys(unansweredQuestions).map(key => questions[key]).sort((a, b) =>
-  a.timestamp< b.timestamp ? 1 : -1)
-  const orderedAnsweredQuestions = Object.keys(answeredQuestions).map(key => questions[key]).sort((a, b) =>
-  a.timestamp< b.timestamp ? 1 : -1)
-  return {
-    orderedUnansweredQuestions,
-    orderedAnsweredQuestions
+  if (users[authedUser]) {
+    const questionKeys = Object.keys(users[authedUser].answers)
+    const answeredQuestions = Object.keys(questions).filter(key => questionKeys.includes(key)).reduce((obj, key) => {obj[key] = questions[key]
+    return obj;
+    }, {});
+    const unansweredQuestions = Object.keys(questions).filter(key => !questionKeys.includes(key)).reduce((obj, key) => {obj[key] = questions[key]
+    return obj;
+    }, {});
+    const orderedUnansweredQuestions = Object.keys(unansweredQuestions).map(key => questions[key]).sort((a, b) =>
+    a.timestamp< b.timestamp ? 1 : -1)
+    const orderedAnsweredQuestions = Object.keys(answeredQuestions).map(key => questions[key]).sort((a, b) =>
+    a.timestamp< b.timestamp ? 1 : -1)
+    return {
+      orderedUnansweredQuestions,
+      orderedAnsweredQuestions
+    }
   }
 }
 

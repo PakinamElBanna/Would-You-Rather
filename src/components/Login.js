@@ -12,7 +12,8 @@ import { setSelectedUser } from '../actions/selectedUser'
 
 class Login extends Component {
   state = {
-    userId: 'johndoe'
+    userId: 'johndoe',
+    authed: false
   }
 
 componentDidMount() {
@@ -30,7 +31,9 @@ handleUserChange = event => {
 handleAuthedUser = event => {
   event.preventDefault()
   this.props.dispatch(setAuthedUser(this.state.userId))
+  setTimeout(() => {
   this.props.history.push("/home")
+  }, 0.005)
 }
 
 

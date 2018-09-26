@@ -32,13 +32,13 @@ class App extends Component {
   }
 
   render() {
-    const {users, authedUser} = this.props
+    const { users, authedUser } = this.props
     return (
       <div className="App">
         <Router>
           <Fragment>
               <LoadingBar />
-              { authedUser && <AppHeader authedUser={this.props.users[authedUser]} />}
+              { authedUser !== null && <AppHeader authedUser={users[authedUser]} />}
               <div className="App-container">
                 <Switch>
                   <Route path='/login' component={Login} />

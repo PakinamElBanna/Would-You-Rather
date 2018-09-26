@@ -11,7 +11,7 @@
   margin: 0;
   text-transform: uppercase;
   font-size: 0.8em;
-  flex-basis: 85%;
+  width: 100%;
   justify-content: space-evenly;
 }
 
