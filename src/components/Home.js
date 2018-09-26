@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleGetQuestions } from '../actions/questions'
+import { handleGetUnansweredQuestions } from '../actions/questions'
 import Question from './Question'
 import './Home.css'
 
@@ -10,13 +10,8 @@ class Home extends Component {
   }
 
   componentDidMount() {
-  this.props.dispatch(handleGetQuestions())
-  this.filterQuestions()
-  }
-
-  filterQuestions = () => {
-   // filter questions based on current tab
-  }
+  this.props.dispatch(handleGetUnansweredQuestions())
+}
 
   handleDisplayQuestions = (e) => {
     e.preventDefault()
@@ -47,13 +42,14 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps({questions}){
+function mapStateToProps({questions, authedUser}){
     let orderedQuestions = Object.keys(questions).map(key => questions[key]).sort((a, b) =>
     a.timestamp< b.timestamp ? 1 : -1)
   return {
     orderedQuestions: orderedQuestions,
     questionsIds: Object.keys(questions)
-  .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+  .sort((a,b) => questions[b].timestamp - questions[a].timestamp),
+  authedUser
   }
 }
 

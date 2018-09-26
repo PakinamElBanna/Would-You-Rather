@@ -1,4 +1,5 @@
 import { saveQuestion, getAllQuestions, answerQuestion } from '../utils/api'
+import { showLoading, hideLoading } from 'react-redux-loading'
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const GET_QUESTIONS = 'GET_QUESTIONS'
 export const ANSWER_QUESTION = 'ANSWER_QUESTION'
@@ -28,19 +29,25 @@ export function getQuestions (questions) {
 
 export function handleAddQuestion(question) {
     return ( dispatch, getState ) => {
+      dispatch(showLoading())
       const { authedUser } = getState()
       return saveQuestion({
         question,
         author: authedUser,
       })
-      .then((question) => dispatch(addQuestion(question)))
+      .then((question) => {
+        dispatch(addQuestion(question))
+        dispatch(hideLoading())
+      })
     }
 }
 
 export function handleAnswerQuestion(questionAnswer) {
   return ( dispatch ) => {
+    dispatch(showLoading())
     dispatch(answerQuestionAndSave(questionAnswer))
     return answerQuestion(questionAnswer)
+    .then(() => dispatch(hideLoading()))
     .catch((e) => {
       console.warn('Error in voting:', e)
       dispatch(answerQuestionAndSave(questionAnswer))
@@ -49,11 +56,30 @@ export function handleAnswerQuestion(questionAnswer) {
   }
 }
 
+export function handleGetUnansweredQuestions() {
+  let unansweredQuestions = {}
+  return (dispatch, getState ) => {
+    dispatch(showLoading())
+    return getAllQuestions()
+    .then(({questions}) => {
+      const { authedUser } = getState()
+      Object.entries(questions).forEach(([key, value]) => {
+      if((!value['optionOne'].votes.includes(authedUser)) && (!value['optionOne'].votes.includes(authedUser)) && (value.author !== authedUser)){
+      unansweredQuestions[key]=value}})
+      dispatch(getQuestions(unansweredQuestions))
+      dispatch(hideLoading())
+    })
+  }
+}
+
+
 export function handleGetQuestions() {
   return (dispatch) => {
+    dispatch(showLoading())
     return getAllQuestions()
     .then(({questions}) => {
       dispatch(getQuestions(questions))
+      dispatch(hideLoading())
     })
   }
 }

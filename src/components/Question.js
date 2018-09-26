@@ -4,13 +4,12 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import {formatDate} from '../utils/helpers'
 import { handleAnswerQuestion } from '../actions/questions'
 import Avatar from './Avatar'
 import './Question.css'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Votes from './Votes'
 import {TiArrowLeft} from 'react-icons/ti/index'
 
@@ -86,7 +85,7 @@ class Question extends Component {
                    </div>}
                 </div>
                  <div className="Question-button">
-                    <Button variant="contained" color="primary" onClick={question? null : this.submitAnswer} disabled={!question && this.state.option === ''}>
+                    <Button variant="contained" color="primary" onClick={question? this.goBack : this.submitAnswer} disabled={!question && this.state.option === ''}>
                       {question? <Link className="Button-Link" to={`/questions/${question.id}`}>View Poll</Link>
                       :
                       displayVotes === false ? <span>Vote</span>

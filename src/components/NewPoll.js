@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
-import { formatQuestion } from '../utils/helpers'
+import { withRouter } from 'react-router-dom'
 import { handleAddQuestion } from '../actions/questions'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'

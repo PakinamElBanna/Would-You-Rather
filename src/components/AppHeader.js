@@ -6,7 +6,7 @@ import logo from '../logo.svg'
 const  AppHeader = ({ users, authedUser }) =>
 
       <div className="App-header">
-      <img className='logo' src={logo} />
+      <img className='logo' src={logo} alt="logo" />
       {authedUser !== null && <div className="App-Navigation">
         <Navigation />
           <div className="small-avatar">

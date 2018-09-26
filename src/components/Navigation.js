@@ -10,8 +10,6 @@ class Navigation extends Component {
       this.props.dispatch(setAuthedUser(null))
       this.props.history.push('/home')
     }
-
-    const { authedUser } = this.props
     return (
       <div className="Navigation">
         <ul className="Navigation-list">

@@ -3,12 +3,6 @@ import './Votes.css'
 import Avatar from './Avatar'
 
 class Votes extends Component {
-  componentDidMount(){
-    const total = this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length
-    const optionOneVotes = this.props.question.optionOne.votes.length
-    const optionTwoVotes = this.props.question.optionTwo.votes.length
-
-  }
 
   isSelected = (option) => {
     const optionName = this.props.question[option]
