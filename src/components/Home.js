@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
+import Button from '@material-ui/core/Button';
 import './Home.css'
 
 class Home extends Component {
@@ -16,6 +17,13 @@ class Home extends Component {
     })
   }
 
+  goBack = (e) => {
+    e.preventDefault()
+    this.setState({
+      tab: 'Unanswered'
+    })
+  }
+
   render() {
     const { tab } = this.state
     return (
@@ -25,18 +33,23 @@ class Home extends Component {
         <li onClick={this.handleDisplayQuestions} className={tab === 'Answered' ? 'Questions-item active' : 'Questions-item'}>Answered</li>
       </ul>
       <ul className="Questions-List">
-        {this.state.tab === 'Answered' ? this.props.orderedAnsweredQuestions.map((question) => (
+        {this.state.tab === 'Answered' ?
+          this.props.orderedAnsweredQuestions.length> 0 ?
+          this.props.orderedAnsweredQuestions.map((question) => (
           <li key={question.id}>
           <Question question={question}/>
           </li>
-        ))
+        )) : <p>You have no answered questions. Why not vote on some polls?</p>
         :
+        this.props.orderedUnansweredQuestions.length > 0 ?
         this.props.orderedUnansweredQuestions.map((question) => (
           <li key={question.id}>
           <Question question={question}/>
           </li>
-        ))
-        }
+        )) :
+           <div>
+             <p>You have no unanswered questions. :)</p>
+           </div>}
         </ul>
       </div>
     )
