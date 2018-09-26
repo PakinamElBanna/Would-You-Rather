@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleGetUserScores } from '../actions/users'
 import LeaderboardCard from './LeaderboardCard'
 
 class Leaderboard extends Component {
-  componentDidMount() {
-    this.props.dispatch(handleGetUserScores())
-  }
   render() {
     const { users } = this.props
     return (

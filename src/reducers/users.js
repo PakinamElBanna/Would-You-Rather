@@ -3,11 +3,6 @@ import { GET_USERS, GET_SCORES } from '../actions/users'
 export default function getUsers (state = {}, action ) {
   switch(action.type){
     case GET_USERS:
-    return {
-      ...state,
-      ...action.users
-    }
-    case GET_SCORES:
     let users = {}
     for (var user in action.users ) {
     action.users[user]['questionsCreated'] = Object.keys(action.users[user].questions).length
@@ -16,7 +11,7 @@ export default function getUsers (state = {}, action ) {
     }
     return {
       ...state,
-      users
+      ...action.users
     }
     default:
     return state
