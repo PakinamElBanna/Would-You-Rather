@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
@@ -12,6 +12,7 @@ import Login from './Login'
 import Home from './Home'
 import QuestionPage from './QuestionPage'
 import Leaderboard from './Leaderboard'
+import NoMatch from './NoMatch'
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -37,16 +38,17 @@ class App extends Component {
         <Router>
           <Fragment>
               <LoadingBar />
-              <AppHeader users={users} authedUser={authedUser} />
+              { authedUser && <AppHeader authedUser={this.props.users[authedUser]} />}
               <div className="App-container">
-                <div>
+                <Switch>
                   <Route path='/login' component={Login} />
                   <PrivateRoute authed={authedUser !== null} exact path='/' component={Home} />
                   <PrivateRoute authed={authedUser !== null} path='/home' component={Home} />
                   <PrivateRoute authed={authedUser !== null} path='/add' component={NewPoll} />
                   <PrivateRoute authed={authedUser !== null} path='/questions/:id' component={QuestionPage} />
                   <PrivateRoute authed={authedUser !== null} path='/leaderboard' component={Leaderboard} />
-                </div>
+                  <Route component={NoMatch} />
+              </Switch>
               </div>
           </Fragment>
         </Router>
@@ -57,9 +59,10 @@ class App extends Component {
 }
 
 
-function mapStateToProps({users, authedUser}){
+function mapStateToProps({users, questions, authedUser}){
   return {
     users,
+    questions,
     authedUser
   }
 }

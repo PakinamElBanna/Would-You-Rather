@@ -1,5 +1,4 @@
 import { getAllUsers } from '../utils/api'
-import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const GET_USERS = 'GET_USERS'
 

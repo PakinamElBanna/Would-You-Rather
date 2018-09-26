@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   position: relative;
+  height: 100%;
 }
 
 .App-container {
@@ -45,4 +46,25 @@
 
 .logo {
   width: 250px;
+}
+.noMatch h1 {
+  font-size: 5em;
+  color: #fe4873;
+  margin: 0;
+}
+.noMatch h3 {
+  color: #464646;
+  margin: 0;
+}
+.noMatch-Button {
+  margin-top: 2em;
+}
+.noMatch-Button button {
+  font-size: 1.5em;
+  color: #fff;
+  background: #482c6d;
+}
+.noMatch-Button a{
+  color: #fff;
+  text-decoration: none;
 }

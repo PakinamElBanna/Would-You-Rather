@@ -31,7 +31,11 @@ class Question extends Component {
 
   handleClick = () => {
     if(!this.props.question) {
-      this.state.displayVotes ? <Redirect to={'/home'}></Redirect> : this.submitAnswer()
+      if(this.state.displayVotes) {
+        return <Redirect to={'/home'}></Redirect>
+      } else {
+        return this.submitAnswer()
+      }
     }
   }
 
