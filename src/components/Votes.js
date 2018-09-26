@@ -6,7 +6,7 @@ class Votes extends Component {
 
   isSelected = (option) => {
     const optionName = this.props.question[option]
-    const {authedUser} = this.props
+    const {authedUser, users} = this.props
     return optionName.votes.includes(authedUser)
   }
 
@@ -14,6 +14,7 @@ class Votes extends Component {
     const { authedUser, users } = this.props
     const optionOnePercentage = (this.props.question.optionOne.votes.length/(this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) * 100
     const optionTwoPercentage = (this.props.question.optionTwo.votes.length/(this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) * 100
+    const sum = this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length
     const { optionOne, optionTwo } = this.props.question
 
     const optionTwoStyle = () => {
@@ -37,7 +38,7 @@ class Votes extends Component {
           <div className="Vote-Bar">
             <div className="Vote-Bar-Width" style={optionOneStyle()}></div>
           </div>
-          <span className="Vote-Number">{optionOnePercentage}%</span>
+          <span className="Vote-Number">{optionOnePercentage}% ({this.props.question.optionOne.votes.length} of {sum} votes )</span>
           </div>
         </div>
         <div className="Vote">
@@ -47,7 +48,7 @@ class Votes extends Component {
         <div className="Vote-Bar">
           <div className="Vote-Bar-Width" style={optionTwoStyle()}></div>
         </div>
-        <span className="Vote-Number">{optionTwoPercentage}%</span>
+        <span className="Vote-Number">{optionTwoPercentage}% ({this.props.question.optionTwo.votes.length} of {sum} votes )</span>
         </div>
         </div>
       </div>

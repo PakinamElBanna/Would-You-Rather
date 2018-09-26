@@ -1,8 +1,26 @@
-import { GET_QUESTIONS, ADD_QUESTION, ANSWER_QUESTION } from '../actions/questions'
+import { GET_UNANSWERED_QUESTIONS, GET_ANSWERED_QUESTIONS, GET_QUESTIONS, ADD_QUESTION, ANSWER_QUESTION } from '../actions/questions'
 
 export default function questions (state = {}, action ) {
   switch(action.type){
     case GET_QUESTIONS:
+    return {
+      ...state,
+      ...action.questions
+    }
+    case GET_UNANSWERED_QUESTIONS:
+    let unansweredQuestionKeys = Object.keys(action.users[action.authedUser].answers)
+    action.questions = Object.keys(action.questions).filter(key => !unansweredQuestionKeys.includes(key)).reduce((obj, key) => {obj[key] = action.questions[key]
+    return obj;
+    }, {});
+    return {
+      ...state,
+      ...action.questions
+    }
+    case GET_ANSWERED_QUESTIONS:
+    let answeredQuestionKeys = Object.keys(action.users[action.authedUser].answers)
+    action.questions = Object.keys(action.questions).filter(key => answeredQuestionKeys.includes(key)).reduce((obj, key) => {obj[key] = action.questions[key]
+    return obj;
+    }, {});
     return {
       ...state,
       ...action.questions
@@ -20,7 +38,6 @@ export default function questions (state = {}, action ) {
         filteredState[action.qid]['optionTwo'].votes = filteredState[action.qid]['optionTwo'].votes.filter((user) => user !== action.authedUser)
         state = filteredState
         return state[action.qid][answer].votes.concat([action.authedUser])
-
     }
     return {
       ...state,

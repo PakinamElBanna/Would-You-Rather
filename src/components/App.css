@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
 .App-container {
@@ -34,6 +35,8 @@
   right: 0;
   left: 0;
   margin-right: 2em;
+  position: absolute;
+  bottom: -4em;
 }
 
 .footer-icon {
@@ -42,9 +45,4 @@
 
 .logo {
   width: 250px;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }

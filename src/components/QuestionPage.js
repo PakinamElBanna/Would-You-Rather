@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import Question from './Question'
 
 class QuestionPage extends Component {
+  componentWillUnmount(){
+
+  }
     render() {
       const { id } = this.props.match.params
       return (
         <div>
-          <Question id={id}/>
+          { id && <Question id={id}/> }
         </div>
       )
     }

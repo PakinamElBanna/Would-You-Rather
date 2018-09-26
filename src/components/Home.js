@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleGetUnansweredQuestions } from '../actions/questions'
+import { handleGetQuestions, handleGetAnsweredQuestions } from '../actions/questions'
 import Question from './Question'
 import './Home.css'
 
@@ -10,7 +10,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-  this.props.dispatch(handleGetUnansweredQuestions())
+  this.props.dispatch(handleGetQuestions())
 }
 
   handleDisplayQuestions = (e) => {
@@ -22,7 +22,6 @@ class Home extends Component {
   }
 
   render() {
-    const { questions } = this.props
     return (
       <div>
       <ul className="Questions-Navigation">
@@ -30,7 +29,7 @@ class Home extends Component {
         <li onClick={this.handleDisplayQuestions} className="Questions-item">answered</li>
       </ul>
       <ul className="Questions-List">
-        {Object.values(this.props.orderedQuestions).map((question) => (
+        {this.props.orderedQuestions.map((question) => (
           <li key={question.id}>
           <Question question={question}/>
           </li>
@@ -42,14 +41,13 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps({questions, authedUser}){
+function mapStateToProps({questions}){
     let orderedQuestions = Object.keys(questions).map(key => questions[key]).sort((a, b) =>
     a.timestamp< b.timestamp ? 1 : -1)
   return {
-    orderedQuestions: orderedQuestions,
+    orderedQuestions,
     questionsIds: Object.keys(questions)
-  .sort((a,b) => questions[b].timestamp - questions[a].timestamp),
-  authedUser
+  .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
   }
 }
 

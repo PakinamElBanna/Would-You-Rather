@@ -2,6 +2,8 @@ import { saveQuestion, getAllQuestions, answerQuestion } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const GET_QUESTIONS = 'GET_QUESTIONS'
+export const GET_UNANSWERED_QUESTIONS = 'GET_UNANSWERED_QUESTIONS'
+export const GET_ANSWERED_QUESTIONS = 'GET_ANSWERED_QUESTIONS'
 export const ANSWER_QUESTION = 'ANSWER_QUESTION'
 
 export function addQuestion (question) {
@@ -20,10 +22,28 @@ export function answerQuestionAndSave({ authedUser, qid, answer }) {
   }
 }
 
-export function getQuestions (questions) {
+export function getQuestions ({questions}) {
   return {
     type: GET_QUESTIONS,
     questions,
+  }
+}
+
+export function getUnansweredQuestions ({questions, authedUser, users}) {
+  return {
+    type: GET_UNANSWERED_QUESTIONS,
+    questions,
+    authedUser,
+    users
+  }
+}
+
+export function getAnsweredQuestions ({questions, authedUser, users}) {
+  return {
+    type: GET_ANSWERED_QUESTIONS,
+    questions,
+    authedUser,
+    users
   }
 }
 
@@ -59,25 +79,36 @@ export function handleAnswerQuestion(questionAnswer) {
 export function handleGetUnansweredQuestions() {
   let unansweredQuestions = {}
   return (dispatch, getState ) => {
+    const { authedUser } = getState()
     dispatch(showLoading())
     return getAllQuestions()
     .then(({questions}) => {
-      const { authedUser } = getState()
-      Object.entries(questions).forEach(([key, value]) => {
-      if((!value['optionOne'].votes.includes(authedUser)) && (!value['optionOne'].votes.includes(authedUser)) && (value.author !== authedUser)){
-      unansweredQuestions[key]=value}})
-      dispatch(getQuestions(unansweredQuestions))
+      const { authedUser, users } = getState()
+      dispatch(getUnansweredQuestions({questions, authedUser, users}))
       dispatch(hideLoading())
     })
   }
 }
 
+export function handleGetAnsweredQuestions() {
+  let asweredQuestions = {}
+  return (dispatch, getState ) => {
+    const { authedUser } = getState()
+    dispatch(showLoading())
+    return getAllQuestions()
+    .then(({questions}) => {
+      const { authedUser, users } = getState()
+      dispatch(getAnsweredQuestions({questions, authedUser, users}))
+      dispatch(hideLoading())
+    })
+  }
+}
 
 export function handleGetQuestions() {
   return (dispatch) => {
     dispatch(showLoading())
     return getAllQuestions()
-    .then(({questions}) => {
+    .then((questions) => {
       dispatch(getQuestions(questions))
       dispatch(hideLoading())
     })
