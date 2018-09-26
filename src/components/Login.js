@@ -31,9 +31,11 @@ handleUserChange = event => {
 handleAuthedUser = event => {
   event.preventDefault()
   this.props.dispatch(setAuthedUser(this.state.userId))
-  setTimeout(() => {
-  this.props.history.push("/home")
-  }, 0.005)
+  if(this.props.location.state.from.pathname){
+    this.props.history.push(this.props.location.state.from.pathname)
+  }else {
+    this.props.history.push("/home")
+  }
 }
 
 
