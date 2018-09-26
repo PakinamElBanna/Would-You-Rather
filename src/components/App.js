@@ -47,6 +47,7 @@ class App extends Component {
                   <PrivateRoute authed={authedUser !== null} path='/add' component={NewPoll} />
                   <PrivateRoute authed={authedUser !== null} path='/questions/:id' component={QuestionPage} />
                   <PrivateRoute authed={authedUser !== null} path='/leaderboard' component={Leaderboard} />
+                  <Route path='/404' component={NoMatch} />
                   <Route component={NoMatch} />
               </Switch>
               </div>

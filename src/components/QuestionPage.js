@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import Question from './Question'
 
 class QuestionPage extends Component {
@@ -6,7 +7,10 @@ class QuestionPage extends Component {
       const { id } = this.props.match.params
       return (
         <div>
-          { id && <Question id={id}/> }
+          {this.props.location.state && this.props.location.state.from.pathname === "/home"?
+           id && <Question id={id}/>
+          :
+          <Redirect to="/404"/>}
         </div>
       )
     }

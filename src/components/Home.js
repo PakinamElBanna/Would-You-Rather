@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
-import Button from '@material-ui/core/Button';
 import './Home.css'
 
 class Home extends Component {

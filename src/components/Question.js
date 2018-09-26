@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -61,6 +61,7 @@ class Question extends Component {
     const { option, displayVotes } = this.state
 
     return (
+
       <div className="Question">
           { !question &&
               <Link className="Back" to={'/home'}><TiArrowLeft /></Link>
@@ -97,7 +98,7 @@ class Question extends Component {
                 </div>
                  <div className="Question-button">
                     <Button variant="contained" color="primary" onClick={this.handleClick} disabled={!question && this.state.option === '' && !displayVotes}>
-                      {question? <Link className="Button-Link" to={`/questions/${question.id}`}>View Poll</Link>
+                      {question? <Link className="Button-Link" to={{pathname:`/questions/${question.id}`, state: {from: this.props.location}}}>View Poll</Link>
                       :
                       displayVotes === false?<span>Vote</span>
                     :<Link className="Button-Link" to={'/home'}>Back</Link>}
@@ -120,4 +121,4 @@ function mapStateToProps({users, questions, authedUser}, {id = null, question = 
   }
 }
 
-export default connect(mapStateToProps)(Question)
+export default withRouter(connect(mapStateToProps)(Question))
