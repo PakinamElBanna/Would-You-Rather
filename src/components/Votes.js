@@ -6,8 +6,7 @@ class Votes extends Component {
 
   isSelected = (option) => {
     const optionName = this.props.question[option]
-    const {authedUser} = this.props
-    return optionName.votes.includes(authedUser)
+    return optionName.votes.includes(this.props.authedUser)
   }
 
   render() {

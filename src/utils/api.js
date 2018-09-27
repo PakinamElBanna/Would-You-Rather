@@ -4,7 +4,6 @@ import {
   _saveQuestion,
   _saveQuestionAnswer
 } from './_DATA.js'
-import { formatQuestion } from './helpers'
 
 export function getInitialData () {
   return Promise.all([
@@ -25,7 +24,7 @@ export function getAllUsers () {
 }
 
 export function saveQuestion (info) {
-  return _saveQuestion(formatQuestion(info))
+  return _saveQuestion(info.question)
 }
 
 export function answerQuestion (answer) {

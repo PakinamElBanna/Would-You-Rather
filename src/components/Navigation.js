@@ -1,17 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { setAuthedUser } from '../actions/authedUser'
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom'
 import './Navigation.css'
 
-class Navigation extends Component {
-  render() {
-    const logout = ()  =>  {
-      this.props.dispatch(setAuthedUser(null))
-      this.props.history.push('/home')
-    }
-    return (
-      <div className="Navigation">
+const Navigation = ({onLogoutClick}) =>
+    <div className="Navigation">
         <ul className="Navigation-list">
           <li className="Navigation-item">
           <NavLink to='/home'>
@@ -28,13 +22,18 @@ class Navigation extends Component {
             Leaderboard
           </NavLink>
           </li>
-          <li className="Navigation-item" onClick={logout}>
+          <li className="Navigation-item" onClick={() => onLogoutClick(null)}>
             Logout
           </li>
         </ul>
       </div>
-    )
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLogoutClick: (id) => {
+      dispatch(setAuthedUser(id))
+    }
   }
 }
 
-export default withRouter(connect()(Navigation))
+export default withRouter(connect(null, mapDispatchToProps)(Navigation))

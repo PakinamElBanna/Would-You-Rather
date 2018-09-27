@@ -6,11 +6,11 @@ export function formatDate (timestamp) {
 
 
 export function formatQuestion (question) {
-  const { optionOneText, optionTwoText } = question.question
+  const { optionOne, optionTwo } = question
   const { author } = question
   return {
-    optionOneText,
-    optionTwoText,
+    optionOne,
+    optionTwo,
     author
   }
 }

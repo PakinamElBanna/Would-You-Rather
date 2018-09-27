@@ -6,77 +6,57 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 class NewPoll extends Component {
-  state = {
-    optionOneText: '',
-    optionTwoText: '',
-    author: null,
-    toHome: false
+  constructor(props) {
+  super(props);
+  this.state = {
+    optionOne: '',
+    optionTwo: '',
+    author: this.props.authedUser
   }
+}
 
   isDisabled () {
-    return this.state.optionOneText.length < 3  || this.state.optionTwoText.length < 3
+    return this.state.optionOne.length < 3  || this.state.optionTwo.length < 3
   }
 
-  handleOptionOne = (e) => {
-    e.preventDefault()
-    const optionOneText = e.target.value
+  handleOption = (e) => {
+    const key = e.target.id
+    const value= e.target.value
     this.setState(() => ({
-      optionOneText
-    }))
-  }
-
-  handleOptionTwo = (e) => {
-    e.preventDefault()
-    const optionTwoText = e.target.value
-    this.setState(() => ({
-      optionTwoText
+      [key]: value
     }))
   }
 
   handleAddPoll (e) {
     e.preventDefault()
-      const { optionOneText, optionTwoText, author } = this.state
-      const question = {
-        optionOneText,
-        optionTwoText,
-        author
-      }
       const { dispatch } = this.props
-      dispatch(handleAddQuestion(question))
-      .then(() => this.setState(() => ({
-        toHome: true
-      })))
+      dispatch(handleAddQuestion(this.state))
+      .then(() => this.props.authedUser? this.props.history.push("/home") : null)
     }
 
   render() {
-    const { optionOneText , optionTwoText, toHome } = this.state
-    const { authedUser } = this.props
-
-    if ( authedUser && toHome === true ) {
-      this.props.history.push('/home')
-    }
-
+    const { optionOne , optionTwo } = this.state
     return (
       <div className="sub-container">
         <h1>Would you rather..</h1>
         <form onSubmit={this.handleAddPoll.bind(this)}>
           <TextField
               required
-              id="standard-required"
+              id="optionOne"
               label="Option one"
               fullWidth
               margin="normal"
-              value={optionOneText}
-              onChange={this.handleOptionOne}
+              value={optionOne}
+              onChange={this.handleOption}
               />
           <TextField
               required
-              id="standard-required"
+              id="optionTwo"
               label="Option two"
               fullWidth
               margin="normal"
-              value={optionTwoText}
-              onChange={this.handleOptionTwo}
+              value={optionTwo}
+              onChange={this.handleOption}
               />
           <div className="button">
             <Button disabled={this.isDisabled()} type="submit" variant="contained" color="primary" fullWidth>

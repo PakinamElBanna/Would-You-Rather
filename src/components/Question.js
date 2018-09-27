@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -22,7 +22,6 @@ class Question extends Component {
   }
 
   handleOptionChange = (e) => {
-    e.preventDefault()
     const option= e.target.value
     this.setState(() => ({
       option
@@ -32,7 +31,7 @@ class Question extends Component {
   handleClick = () => {
     if(!this.props.question) {
       if(this.state.displayVotes) {
-        return <Redirect to={'/home'}></Redirect>
+        this.props.history.push('/home')
       } else {
         return this.submitAnswer()
       }
