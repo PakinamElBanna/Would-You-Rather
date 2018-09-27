@@ -1,13 +1,26 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
+import React, {Component} from 'react'
+import { BrowserRouter as Router, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Question from './Question'
 
-const QuestionPage = (props) => (
-        <div>
-          {props.location.state && props.location.state.from.pathname === "/home"?
-            props.match.params && <Question id={props.match.params.id}/>
-          :
-          <Redirect to="/404"/>}
-        </div>
-)
-export default QuestionPage
+class QuestionPage extends Component {
+render(){
+  return(
+    <div>
+      {this.props.location.state && this.props.authedUser?
+        this.props.match.params && <Question id={this.props.match.params.id}/>
+      :
+      <Redirect to="/404"/>}
+    </div>
+  )
+}
+
+}
+
+function mapStateToProps({authedUser}){
+  return {
+    authedUser
+  }
+}
+
+export default connect(mapStateToProps)(QuestionPage)
